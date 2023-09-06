@@ -3,10 +3,18 @@ title: Links
 links:
   - title: GitHub
     description: GitHub is the world's largest software development platform.
-    website: https://github.com
+    website: https://github.com/a-oxide
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+  - title: LinkedIn
+    description: LinkedIn is a business and employment-focused social media platform that works through websites and mobile apps.
+    website: https://www.linkedin.com/in/aidan-rust-91a013251
+    image: https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg
+  - title: Contact
+    description: Contact me through Email
+    website: mailto:cthuu8mv@duck.com
+    image: gmail.png
 menu:
-    main: 
+    main:
         weight: 4
         params:
             icon: link
@@ -14,20 +22,4 @@ menu:
 comments: false
 ---
 
-To use this feature, add `links` section to frontmatter.
-
-This page's frontmatter:
-
-```yaml
-links:
-  - title: GitHub
-    description: GitHub is the world's largest software development platform.
-    website: https://github.com
-    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-  - title: TypeScript
-    description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
-    website: https://www.typescriptlang.org
-    image: ts-logo-128.jpg
-```
-
-`image` field accepts both local and external images.
+This page contains all pertinent links to social media and other contact information
