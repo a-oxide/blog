@@ -5,7 +5,7 @@ slug: vr-haptics
 date: 2022-06-09 00:00:00+0000
 image:
 categories:
-    - In-Progress
+    - Planned
 tags:
     - Electrical Engineering
     - Troubleshooting
