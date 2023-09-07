@@ -5,7 +5,7 @@ slug: conductor-lamp
 date: 2023-06-09 00:00:00+0000
 image: IMG_3144.jpg
 categories:
-    - Completed
+    - In-Progress
 tags:
     - Troubleshooting
     - Restoration
