@@ -1,4 +1,6 @@
 ---
+title: Links
+slug: links
 links:
   - title: GitHub
     description: GitHub is the world's largest software development platform.
@@ -21,4 +23,4 @@ menu:
 comments: false
 ---
 
-Here you can find my social media profiles and other means of communicating with me
+Here you can find my social media profiles as well as other means of communicating with me
