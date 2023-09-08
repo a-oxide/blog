@@ -5,7 +5,7 @@ slug: sig-lamp
 date: 2023-07-09 00:00:00+0000
 image: cover.png
 categories:
-    - In-Progress
+    - Projects
 tags:
     - Troubleshooting
     - Restoration

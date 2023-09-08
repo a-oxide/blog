@@ -1,6 +1,6 @@
 ---
 title: Planned
-description: A collection of potential projects
+description: A collection of all reviews for consumer products
 image: lucidgloves.png
 
 # Badge style

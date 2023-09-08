@@ -1,6 +1,6 @@
 ---
-title: In-Progress
-description: A collection of all unfinished projects
+title: Projects
+description: A collection of all in-progress or completed projects
 image: cover.png
 
 # Badge style
