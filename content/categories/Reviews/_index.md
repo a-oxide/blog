@@ -1,7 +1,7 @@
 ---
-title: Planned
+title: Reviews
 description: A collection of all reviews for consumer products
-image: lucidgloves.png
+image: cover.png
 
 # Badge style
 style:
