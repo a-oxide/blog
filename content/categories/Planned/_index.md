@@ -1,7 +1,7 @@
 ---
 title: Planned
 description: A collection of potential projects
-image: 
+image: lucidgloves.png
 
 # Badge style
 style:

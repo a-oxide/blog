@@ -23,4 +23,4 @@ menu:
 comments: false
 ---
 
-Here you can find my social media profiles as well as other means of communicating with me
+Social media pages and methods of communication
