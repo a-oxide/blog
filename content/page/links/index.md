@@ -20,3 +20,5 @@ menu:
 
 comments: false
 ---
+
+Here you can find my social media profiles and other means of communicating with me
