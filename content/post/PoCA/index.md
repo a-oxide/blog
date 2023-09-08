@@ -5,7 +5,7 @@ slug: poca
 date: 2023-06-09 00:00:00+0000
 image: cover.png
 categories:
-    - In-Progress
+    - Projects
 tags:
     - RF
     - Electrical Engineering
