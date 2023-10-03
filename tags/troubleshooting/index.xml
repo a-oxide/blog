@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Troubleshooting on Aidan Rust</title><link>https://a-oxide.github.io/paragraphical/tags/troubleshooting/</link><description>Recent content in Troubleshooting on Aidan Rust</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 09 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://a-oxide.github.io/paragraphical/tags/troubleshooting/index.xml" rel="self" type="application/rss+xml"/><item><title>Portable Communications Array</title><link>https://a-oxide.github.io/paragraphical/p/poca/</link><pubDate>Fri, 09 Jun 2023 00:00:00 +0000</pubDate><guid>https://a-oxide.github.io/paragraphical/p/poca/</guid><description>&lt;img src="https://a-oxide.github.io/paragraphical/p/poca/cover.jpg" alt="Featured image of post Portable Communications Array" />&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>This project began when I received a Raspberry Pi 4b as a gift from my lovely girlfriend. I had long sought a similarly capable single-board computer to host a &lt;a class="link" href="https://safing.io/spn/" target="_blank" rel="noopener"
+>Safing Community Node&lt;/a>. After realizing the (many) risks of hosting a public node from my dorm internet, I began researching other uses. After stumbling upon the &lt;a class="link" href="https://www.doscher.com/work-recovery-kit/" target="_blank" rel="noopener"
+>Raspberry Pi Recovery Kit&lt;/a> by Jay Doscher, I had an idea to adapt his design into a mobile Software Defined Radio (SDR)/digital storage device.&lt;/p>
+&lt;h3 id="disclaimer">Disclaimer&lt;/h3>
+&lt;p>I know that this is far from the most efficient configuration for a RPi-based SDR. I chose this specific route not simply based on efficacy but rather as a way to explore other engineering challenges besides RF.&lt;/p>
+&lt;p>This article was written with assumption that you have &lt;em>some&lt;/em> knowledge of Raspberry Pi computing and RF.&lt;/p>
+&lt;p>If all you wish is to attempt to build it yourself and have no interest in my journey, you can find the links to all the parts and files at the bottom of each section.&lt;/p>
+&lt;h3 id="desired-features">Desired Features&lt;/h3>
+&lt;ul>
+&lt;li>SDR capable of TX and RX&lt;/li>
+&lt;li>6 hour battery life&lt;/li>
+&lt;li>1 TB of storage&lt;/li>
+&lt;li>Ability to run as a storage server&lt;/li>
+&lt;li>Ability to run &lt;a class="link" href="https://www.sdrpp.org/" target="_blank" rel="noopener"
+>SDR++&lt;/a> locally&lt;/li>
+&lt;li>Watertight when closed&lt;/li>
+&lt;li>Ability to fit all necessary peripherals inside watertight case&lt;/li>
+&lt;li>Portable&lt;/li>
+&lt;/ul>
+&lt;h2 id="3d-modeling">3D Modeling&lt;/h2>
+&lt;p>Since the majority of the 3D models were generously provided by Jay Doscher, I only needed to slightly modify the I/O plate and the overall dimensions to fit my purposes. Since my changes were minor, I primarily used &lt;a class="link" href="https://tinkercad.com/" target="_blank" rel="noopener"
+>Tinkercad&lt;/a> to design the models. I used the 3D printing resources at the &lt;a class="link" href="https://www.instagram.com/p/CqoHByoPkVG/?img_index=1" target="_blank" rel="noopener"
+>Billodue Makerspace&lt;/a> to FDM print all the parts over the course of two weeks.&lt;/p>
+&lt;p>&lt;img src="https://a-oxide.github.io/paragraphical/paragraphical/p/poca/rotate.gif"
+width="2560"
+height="1440"
+srcset="https://a-oxide.github.io/paragraphical/paragraphical/p/poca/rotate_hu9e650f30c883ede3f873f398e24cc58b_12880601_480x0_resize_box_1.gif 480w, https://a-oxide.github.io/paragraphical/paragraphical/p/poca/rotate_hu9e650f30c883ede3f873f398e24cc58b_12880601_1024x0_resize_box_1.gif 1024w"
+loading="lazy"
+alt="Revised keyboard tray"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/p>
+&lt;p>I returned to the makerspace regularly for a couple weeks as I prototyped and experimented with the design. After a few iterations I got a model that fit my parts perfectly. Due to my impatience (and lack of funds) I decided to just to ahead and use the final prototype parts, however if you are recreating my process I would highly recommend taking the extra time getting it all to look exactly as you want. As a result, my parts have many scuffs and minor imperfections that could&amp;rsquo;ve been smoothed out.&lt;/p>
+&lt;p>It&amp;rsquo;s important to note that I forgot to post-process my parts, so if you intend to follow this blog as a guide I would recommend you follow one of the many guides online to properly prepare your parts after printing. It can improve the longevity and the aesthetics of your final build.&lt;/p>
+&lt;h2 id="part-selection-and-research">Part Selection and Research&lt;/h2>
+&lt;h3 id="power">Power&lt;/h3>
+&lt;p>Finding and ordering the parts was very time consuming. The primary constraint of the project (besides money) was power. The RPi itself has a specification of 5 volts at 3 amps, or 15 watts. Sourcing a powerbank that could provide that power was not too challenging, so I settled on the best deal I could find.&lt;/p>
+&lt;p>It so happened that the &lt;a class="link" href="https://amzn.to/48EsmHK" target="_blank" rel="noopener"
+>Anker model&lt;/a> I chose had a capacity of 20100 mAh, a monstrous amount of power that could power my Pi 4B for a theoretical 6.7 hours at max power draw. I figured that even if I added a couple extra devices to the loop, the battery would be more than sufficient.&lt;/p>
+&lt;p>If you choose to replicate my design, please get a power bank with a higher voltage. My device in it&amp;rsquo;s current state cannot boot off of battery because of the increasing power demands of multiple peripherals. My current draw is at an astronomical 5V at 6A, requiring me to use a drill battery if I really wanted to run PoCA remotely.&lt;/p>
+&lt;h3 id="network-switch">Network Switch&lt;/h3>
+&lt;p>I chose a standard &lt;a class="link" href="https://amzn.to/3rzImKi" target="_blank" rel="noopener"
+>Netgear 4+1 unmanaged switch&lt;/a>, primarily because I didn&amp;rsquo;t want to mess with the tolerances set by Jay Doscher. I went back and forth on whether I needed a switch to match my desired features, but eventually decided that I would rather have extra ports in case I needed to use it as a router in the future. It also just plain looks cool, and seemed to be the best use for the space. Alternatives I explored included:&lt;/p>
+&lt;ul>
+&lt;li>Hot-swap hard drive bay&lt;/li>
+&lt;li>GPIO Pinout and other I/O&lt;/li>
+&lt;li>Storage for a mouse&lt;/li>
+&lt;li>Charging dock for my &lt;a class="link" href="https://flipperzero.one" target="_blank" rel="noopener"
+>Flipper Zero&lt;/a>&lt;/li>
+&lt;li>A second pullout display&lt;/li>
+&lt;/ul>
+&lt;p>If I were to rebuild my current design (which I probably will) I may replace the switch, but as of right now I think it fits the device visually and functionally.&lt;/p>
+&lt;h3 id="display">Display&lt;/h3>
+&lt;p>The display I chose was the simple and proven &lt;a class="link" href="https://amzn.to/3LKbFRm" target="_blank" rel="noopener"
+>Official RPi 7&amp;quot; touchscreen&lt;/a>. A touchscreen was key, as including a mouse that would fit inside the keyboard tray was a near impossibility. This was the best option and it fit the original 3D files by Jay Doscher.&lt;/p>
+&lt;h3 id="case">Case&lt;/h3>
+&lt;p>The best possible option in terms of quality would have been a &lt;a class="link" href="https://amzn.to/48Oc3Iu" target="_blank" rel="noopener"
+>Pelican 1300&lt;/a>, however it was just not cost effective for me. After doing a bit of digging, a case by &lt;a class="link" href="https://www.monoprice.com/product?p_id=10620&amp;amp;seq=1&amp;amp;format=2&amp;amp;res=1" target="_blank" rel="noopener"
+>Pure Outdoor&lt;/a> (AKA Monoprice) matched the size I was looking for (10x9x7 inches). After about six months with this case, I can wholeheartedly recommend it. It feels good to the hands, is relatively lightweight, and shares identical features to a comparable Pelican case.&lt;/p>
+&lt;h3 id="keyboard">Keyboard&lt;/h3>
+&lt;p>I could write a long story about why I chose this keyboard, but the simple answer is that it fit. The space constraints for the lid of the case didn&amp;rsquo;t give me many options in terms of a standard staggered-qwerty layout. This ortho design is a clone from &lt;a class="link" href="https://kprepublic.com/products/bm40-rgb-40-hot-swap-custom-mechanical-keyboard-pcb-qmk-underglow-type-c-planck" target="_blank" rel="noopener"
+>KPRepublic&lt;/a> called the BM40, a company that made their own identical PCB design based off another 47-key design called the &lt;a class="link" href="https://olkb.com/collections/planck" target="_blank" rel="noopener"
+>&amp;ldquo;Planck&amp;rdquo;&lt;/a>.&lt;/p>
+&lt;p>Because of the space constraints, I neglected a case and mounted the keyboard by sandwiching the PCB and the plate between 3D printed supports on the keyboard tray. It worked out quite well, but the design could be tweaked a bit to perfect the tolerances.&lt;/p>
+&lt;p>The switches are &lt;a class="link" href="https://amzn.to/3ROlMbL" target="_blank" rel="noopener"
+>Kailh BOX Jade&lt;/a> switches, which boast excellent reliability and weather resistance, with a dustproof design. They are a bit loud (clicky), so if you are trying to make a more reasonable choice I can recommend the &lt;a class="link" href="https://amzn.to/45eSUML" target="_blank" rel="noopener"
+>Jwick&lt;/a>, however any MX-style switch should do.&lt;/p>
+&lt;p>The keycaps are a &lt;a class="link" href="https://www.aliexpress.us/item/3256805735823117.html?algo_exp_id=94baa4b6-fc5d-45a6-ac00-8f11b216de76-3" target="_blank" rel="noopener"
+>generic set from Aliexpress&lt;/a>. Nothing special.&lt;/p>
+&lt;h3 id="sdr">SDR&lt;/h3>
+&lt;p>The SDR I chose was the full model of the &lt;a class="link" href="https://www.crowdsupply.com/cariboulabs/cariboulite-rpi-hat" target="_blank" rel="noopener"
+>CaribouLite RPi HAT&lt;/a>. While it fit the desired specifications in an incredible form factor, I cannot recommend it. It is far from plug-and-play, and is seemingly abandoned by Cariboulabs, the maintainers of the required software. In hindsight, I would have chosen the far more ubiquitous &lt;a class="link" href="https://amzn.to/46bR5Bx" target="_blank" rel="noopener"
+>HackRF One&lt;/a> by Great Scott Gadgets, a device with similar specifications designed and sold by a seasoned company. If I wanted to buy one of the many clones available for this device, I likely would have even saved a bit of money.&lt;/p>
+&lt;p>I do appreciate that the CaribouLite is designed specifically for the RPi, but until I can get it to &lt;em>actually function&lt;/em> it has no real utility. If I had a bit of a looser budget, I may have opted for a full duplex SDR to experiment with LTE and other communication methods not possible on a half duplex model like the CaribouLite or the HackRF One.&lt;/p>
+&lt;h3 id="io">I/O&lt;/h3>
+&lt;p>I used the NKK &lt;a class="link" href="https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963" target="_blank" rel="noopener"
+>S1AL&lt;/a> and &lt;a class="link" href="https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963" target="_blank" rel="noopener"
+>S7AL&lt;/a> switches as my power switches. the S7AL functions as an on-off-on switch which I use to toggle between external power and the internal battery, and the three S1AL switches toggle on/off power for my RPi, display, and network switch respectively. I later added my powered USB hub to the toggle for the network switch, which slightly compromises the intention of separate power switches, which was to conserve power in the event I only need to access the Pi over SSH or VNC. The rest of my I/O I purchased on Amazon and had no distinctions over other options besides price.&lt;/p>
+&lt;p>The &lt;a class="link" href="https://amzn.to/3PG3hn9" target="_blank" rel="noopener"
+>barrel jack connecters&lt;/a> I included as an option for external power are mounted in two locations: one in the I/O cluster and another on the top of the case, to provide external power if the device was functioning while closed. If you choose to go this route, it&amp;rsquo;s important to use barrel jack connectors that have an &lt;a class="link" href="https://en.wikipedia.org/wiki/IP_code" target="_blank" rel="noopener"
+>IP rating&lt;/a> that supports your needs, because otherwise you compromise the integrity of the case.&lt;/p>
+&lt;h3 id="internal-components">Internal components&lt;/h3>
+&lt;p>Besides the RPi itself, I had an external &lt;a class="link" href="https://amzn.to/3rtGenw" target="_blank" rel="noopener"
+>1 TB M.2 SSD&lt;/a> which I was booting off of, a &lt;a class="link" href="https://amzn.to/46D5CWN" target="_blank" rel="noopener"
+>powered USB hub&lt;/a> to support the power demands of the SSD, and a &lt;a class="link" href="https://amzn.to/3rGxI4n" target="_blank" rel="noopener"
+>large heatsink&lt;/a> to cool the Pi.&lt;/p>
+&lt;h3 id="final-part-list">Final Part List*&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963" target="_blank" rel="noopener"
+>NKK S7AL&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963" target="_blank" rel="noopener"
+>NKK S1AL&lt;/a> * 3&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3F0u8VT" target="_blank" rel="noopener"
+>USB-A Right Angle Adapters&lt;/a> * 3&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.crowdsupply.com/cariboulabs/cariboulite-rpi-hat" target="_blank" rel="noopener"
+>CaribouLite&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3LKbFRm" target="_blank" rel="noopener"
+>RPi 7&amp;quot; Official Display&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3PG3hn9" target="_blank" rel="noopener"
+>Panel Mount DC Barrel Jack&lt;/a> * 2&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/46vM5Y8" target="_blank" rel="noopener"
+>Panel Mount Aux Passthrough&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/46Amq0G" target="_blank" rel="noopener"
+>Panel Mount USB-A&lt;/a> * 5&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/46cP5Jm" target="_blank" rel="noopener"
+>Panel Mount Ethernet&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/48EsmHK" target="_blank" rel="noopener"
+>Anker PowerCore 20100&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3rzImKi" target="_blank" rel="noopener"
+>NETGEAR 5 Port Unmanaged Switch&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/46bd3Vp" target="_blank" rel="noopener"
+>Extendable Dipole Antenna&lt;/a> * 2&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3F1P7Yv" target="_blank" rel="noopener"
+>6 Inch Ethernet Patch Cable&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3rCfkK1" target="_blank" rel="noopener"
+>Extended Tip M5 Set Screws&lt;/a> * 10&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3F1EDs8" target="_blank" rel="noopener"
+>Assorted M5 Screws&lt;/a> * 20-30&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/48uve9U" target="_blank" rel="noopener"
+>Raspberry Pi 4B&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3rGxI4n" target="_blank" rel="noopener"
+>Raspberry Pi Heatsink&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3LKbAwY" target="_blank" rel="noopener"
+>USB to M.2 Shroud&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3rtGenw" target="_blank" rel="noopener"
+>1 TB M.2 SSD&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/46D5CWN" target="_blank" rel="noopener"
+>SABRENT 4 Port Powered USB HUB&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://kprepublic.com/products/bm40-rgb-40-hot-swap-custom-mechanical-keyboard-pcb-qmk-underglow-type-c-planck" target="_blank" rel="noopener"
+>BM40&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.aliexpress.us/item/3256805735823117.html?algo_exp_id=94baa4b6-fc5d-45a6-ac00-8f11b216de76-3" target="_blank" rel="noopener"
+>DSA Keycap Set&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/3ROlMbL" target="_blank" rel="noopener"
+>Kailh Box Jade&lt;/a> * 47&lt;/li>
+&lt;li>&lt;a class="link" href="https://amzn.to/45a3apD" target="_blank" rel="noopener"
+>BM40 Carbon Fiber Plate&lt;/a> * 1&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.monoprice.com/product?p_id=10620&amp;amp;seq=1&amp;amp;format=2&amp;amp;res=1" target="_blank" rel="noopener"
+>Pure Outdoor Hard Case&lt;/a> * 1&lt;/li>
+&lt;/ul>
+&lt;p>Unlisted are various tools, spare parts, and other cabling bits and pieces, none of which are of significant cost.&lt;/p>
+&lt;h2 id="assembly">Assembly&lt;/h2>
+&lt;p>To be included in the next update&lt;/p>
+&lt;h2 id="wiring">Wiring&lt;/h2>
+&lt;p>To be included in the next update&lt;/p></description></item></channel></rss>
