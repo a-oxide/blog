@@ -89,8 +89,6 @@ The [barrel jack connecters](https://amzn.to/3PG3hn9) I included as an option fo
 ### Internal components
 Besides the RPi itself, I had an external [1 TB M.2 SSD](https://amzn.to/3rtGenw) which I was booting off of, a [powered USB hub](https://amzn.to/46D5CWN) to support the power demands of the SSD, and a [large heatsink](https://amzn.to/3rGxI4n) to cool the Pi.
 
-### Tools and Supplies
-
 ### Final Part List*
 * [NKK S7AL](https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963) * 1
 * [NKK S1AL](https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963) * 3
