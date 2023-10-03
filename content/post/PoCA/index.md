@@ -41,14 +41,14 @@ I returned to the makerspace regularly for a couple weeks as I prototyped and ex
 It's important to note that I forgot to post-process my parts, so if you intend to follow this blog as a guide I would recommend you follow one of the many guides online to properly prepare your parts after printing. It can improve the longevity and the aesthetics of your final build.
 
 ## Part Selection and Research
-# Power
+### Power
 Finding and ordering the parts was very time consuming. The primary constraint of the project (besides money) was power. The RPi itself has a specification of 5 volts at 3 amps, or 15 watts. Sourcing a powerbank that could provide that power was not too challenging, so I settled on the best deal I could find.
 
 It so happened that the [Anker model](https://amzn.to/48EsmHK) I chose had a capacity of 20100 mAh, a monstrous amount of power that could power my Pi 4B for a theoretical 6.7 hours at max power draw. I figured that even if I added a couple extra devices to the loop, the battery would be more than sufficient.
 
 If you choose to replicate my design, please get a power bank with a higher voltage. My device in it's current state cannot boot off of battery because of the increasing power demands of multiple peripherals. My current draw is at an astronomical 5V at 6A, requiring me to use a drill battery if I really wanted to run PoCA remotely.
 
-# Network Switch
+### Network Switch
 I chose a standard [Netgear 4+1 unmanaged switch](https://amzn.to/3rzImKi), primarily because I didn't want to mess with the tolerances set by Jay Doscher. I went back and forth on whether I needed a switch to match my desired features, but eventually decided that I would rather have extra ports in case I needed to use it as a router in the future. It also just plain looks cool, and seemed to be the best use for the space. Alternatives I explored included:
 
 * Hot-swap hard drive bay
@@ -59,14 +59,14 @@ I chose a standard [Netgear 4+1 unmanaged switch](https://amzn.to/3rzImKi), prim
 
 If I were to rebuild my current design (which I probably will) I may replace the switch, but as of right now I think it fits the device visually and functionally.
 
-# Display
+### Display
 The display I chose was the simple and proven [Official RPi 7" touchscreen](https://amzn.to/3LKbFRm). A touchscreen was key, as including a mouse that would fit inside the keyboard tray was a near impossibility. This was the best option and it fit the original 3D files by Jay Doscher.
 
 
-# Case
+### Case
 The best possible option in terms of quality would have been a [Pelican 1300](https://amzn.to/48Oc3Iu), however it was just not cost effective for me. After doing a bit of digging, a case by [Pure Outdoor](https://www.monoprice.com/product?p_id=10620&seq=1&format=2&res=1) (AKA Monoprice) matched the size I was looking for (10x9x7 inches). After about six months with this case, I can wholeheartedly recommend it. It feels good to the hands, is relatively lightweight, and shares identical features to a comparable Pelican case.
 
-# Keyboard
+### Keyboard
 I could write a long story about why I chose this keyboard, but the simple answer is that it fit. The space constraints for the lid of the case didn't give me many options in terms of a standard staggered-qwerty layout. This ortho design is a clone from [KPRepublic](https://kprepublic.com/products/bm40-rgb-40-hot-swap-custom-mechanical-keyboard-pcb-qmk-underglow-type-c-planck) called the BM40, a company that made their own identical PCB design based off another 47-key design called the ["Planck"](https://olkb.com/collections/planck).
 
 Because of the space constraints, I neglected a case and mounted the keyboard by sandwiching the PCB and the plate between 3D printed supports on the keyboard tray. It worked out quite well, but the design could be tweaked a bit to perfect the tolerances.
@@ -75,23 +75,23 @@ The switches are [Kailh BOX Jade](https://amzn.to/3ROlMbL) switches, which boast
 
 The keycaps are a [generic set from Aliexpress](https://www.aliexpress.us/item/3256805735823117.html?algo_exp_id=94baa4b6-fc5d-45a6-ac00-8f11b216de76-3). Nothing special.
 
-# SDR
+### SDR
 The SDR I chose was the full model of the [CaribouLite RPi HAT](https://www.crowdsupply.com/cariboulabs/cariboulite-rpi-hat). While it fit the desired specifications in an incredible form factor, I cannot recommend it. It is far from plug-and-play, and is seemingly abandoned by Cariboulabs, the maintainers of the required software. In hindsight, I would have chosen the far more ubiquitous [HackRF One](https://amzn.to/46bR5Bx) by Great Scott Gadgets, a device with similar specifications designed and sold by a seasoned company. If I wanted to buy one of the many clones available for this device, I likely would have even saved a bit of money.
 
 I do appreciate that the CaribouLite is designed specifically for the RPi, but until I can get it to *actually function* it has no real utility. If I had a bit of a looser budget, I may have opted for a full duplex SDR to experiment with LTE and other communication methods not possible on a half duplex model like the CaribouLite or the HackRF One.
 
-# I/O
+### I/O
 I used the NKK [S1AL](https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963) and [S7AL](https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963) switches as my power switches. the S7AL functions as an on-off-on switch which I use to toggle between external power and the internal battery, and the three S1AL switches toggle on/off power for my RPi, display, and network switch respectively. I later added my powered USB hub to the toggle for the network switch, which slightly compromises the intention of separate power switches, which was to conserve power in the event I only need to access the Pi over SSH or VNC. The rest of my I/O I purchased on Amazon and had no distinctions over other options besides price.
 
 The [barrel jack connecters](https://amzn.to/3PG3hn9) I included as an option for external power are mounted in two locations: one in the I/O cluster and another on the top of the case, to provide external power if the device was functioning while closed. If you choose to go this route, it's important to use barrel jack connectors that have an [IP rating](https://en.wikipedia.org/wiki/IP_code) that supports your needs, because otherwise you compromise the integrity of the case.
 
 
-# Internal components
+### Internal components
 Besides the RPi itself, I had an external [1 TB M.2 SSD](https://amzn.to/3rtGenw) which I was booting off of, a [powered USB hub](https://amzn.to/46D5CWN) to support the power demands of the SSD, and a [large heatsink](https://amzn.to/3rGxI4n) to cool the Pi.
 
-# Tools and Supplies
+### Tools and Supplies
 
-# Final Part List*
+### Final Part List*
 * [NKK S7AL](https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963) * 1
 * [NKK S1AL](https://www.digikey.com/en/products/detail/nkk-switches/S1AL/1006963) * 3
 * [USB-A Right Angle Adapters](https://amzn.to/3F0u8VT) * 3
